@@ -1,7 +1,7 @@
  
 
 
-> Open this page at [https://wild-rogue-01.github.io/final-project--dnk/](https://wild-rogue-01.github.io/final-project--dnk/)
+> Open this page at [https://wild-rogue-01.github.io/final-project--DnK/](https://wild-rogue-01.github.io/final-project--DnK/)
  
 
 ## Project title and description
