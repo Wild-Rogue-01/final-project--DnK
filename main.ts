@@ -1,5 +1,5 @@
 //global variables
-let gridToggle: boolean = true
+let gridToggle: boolean = false
 let cursor: Sprite = null
 
 //game update
@@ -29,20 +29,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
 })
-controller.moveSprite(cursor, 100, 100)
 
 //main
-cursor = sprites.create(img`
-    . . . . . . . . .
-    . . . . . . . . .
-    . f . . . . . f .
-    f . . . f . . . f
-    f . . f f f . . f
-    f . . . f . . . f
-    . f . . . . . f .
-    . . . . . . . . .
-    . . . . . . . . .
-`, SpriteKind.Player)
-tiles.setCurrentTilemap(tilemap`level1`)
+cursor = sprites.create(assets.image`cursor`, SpriteKind.Player)
+tiles.setCurrentTilemap(tilemap`world`)
+
+controller.moveSprite(cursor, 100, 100)
+
 scene.cameraFollowSprite(cursor)
 tiles.placeOnTile(cursor, tiles.getTileLocation(1, 1))
