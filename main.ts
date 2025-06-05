@@ -15,19 +15,32 @@ game.onUpdateInterval(500, function () {
 //controller
 
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (game.ask("Toggle grid to " + !gridToggle + "?")) {
-        gridToggle = !gridToggle
+    if (controller.player1.isPressed(ControllerButton.Left) && controller.player1.isPressed(ControllerButton.Right)) {
+        if (game.ask("Toggle grid to " + !gridToggle + "?")) {
+            gridToggle = !gridToggle
 
-        if (gridToggle) {
-            for (let value of tiles.getTilesByType(assets.tile`blank_gridfalse`)) {
-                tiles.setTileAt(value, assets.tile`blank_gridtrue`)
-            }
-        } else {
-            for (let value of tiles.getTilesByType(assets.tile`blank_gridtrue`)) {
-                tiles.setTileAt(value, assets.tile`blank_gridfalse`)
+            if (gridToggle) {
+                for (let value of tiles.getTilesByType(assets.tile`blank_gridfalse`)) {
+                    tiles.setTileAt(value, assets.tile`blank_gridtrue`)
+                }
+            } else {
+                for (let value of tiles.getTilesByType(assets.tile`blank_gridtrue`)) {
+                    tiles.setTileAt(value, assets.tile`blank_gridfalse`)
+                }
             }
         }
+    } else {
+        if (tiles.tileAtLocationEquals(cursor.tilemapLocation(), assets.tile`filled`)) {
+            if (gridToggle) {
+                tiles.setTileAt(cursor.tilemapLocation(), assets.tile`blank_gridtrue`)
+            } else {
+                tiles.setTileAt(cursor.tilemapLocation(), assets.tile`blank_gridfalse`)
+            }
+        } else {
+            tiles.setTileAt(cursor.tilemapLocation(), assets.tile`filled`)
+        }
     }
+    //tiles.tileAtLocationEquals(cursor.tilemapLocation(), assets.tile`blank_gridtrue`) || tiles.tileAtLocationEquals(cursor.tilemapLocation(), assets.tile`blank_gridfalse`) *use if more tile types are added
 })
 
 //main
