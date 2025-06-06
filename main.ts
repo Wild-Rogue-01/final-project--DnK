@@ -1,3 +1,8 @@
+namespace userconfig {
+    export const ARCADE_SCREEN_WIDTH = 320
+    export const ARCADE_SCREEN_HEIGHT = 240
+}
+
 //global variables
 let gridToggle: boolean = false
 let cursor: Sprite = null
@@ -41,6 +46,24 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         }
     }
     //tiles.tileAtLocationEquals(cursor.tilemapLocation(), assets.tile`blank_gridtrue`) || tiles.tileAtLocationEquals(cursor.tilemapLocation(), assets.tile`blank_gridfalse`) *use if more tile types are added
+})
+
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (controller.player1.isPressed(ControllerButton.Left) && controller.player1.isPressed(ControllerButton.Right)) {
+        if (game.ask("Trigger killswitch?")) {
+            if (gridToggle) {
+                for (let value of tiles.getTilesByType(assets.tile`filled`)) {
+                    tiles.setTileAt(value, assets.tile`blank_gridtrue`)
+                }
+            } else {
+                for (let value of tiles.getTilesByType(assets.tile`filled`)) {
+                    tiles.setTileAt(value, assets.tile`blank_gridfalse`)
+                }
+            }
+        }
+    } else {
+        
+    }
 })
 
 //main
