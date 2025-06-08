@@ -78,6 +78,7 @@ function upAndDown () {
         worldSizeY = worldBoxXY
 
         tiles.setCurrentTilemap(tilemap`world`)
+        gridToggle = false
         tiles.placeOnTile(cursor, tiles.getTileLocation(1, 1))
         
         for (let y = worldBoxMax; y >= worldSizeY; y--) {
