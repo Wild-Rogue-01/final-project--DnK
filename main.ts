@@ -6,11 +6,39 @@ namespace userconfig {
 //global variables
 let gridToggle: boolean = false
 let cursor: Sprite = null
+let simToggle: boolean = false
+
+let worldSizeX: number = 15
+let worldSizeY: number = 15
 
 //game update
 
-game.onUpdateInterval(500, function () {
+game.onUpdateInterval(100, function () {
+    if (simToggle) {
+        for (let y = 0; y < worldSizeY; y++) {
+            for (let x = 0; x < worldSizeX; x++) {
 
+                tiles.setTileAt(tiles.getTileLocation(x, y), img`
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . 2 . . . . . . . . . . .
+                    . . . . 2 2 . . . . 2 . . . . .
+                    . . . . . 2 . . . 2 . . . . . .
+                    . . . . . . 2 2 2 2 . . . . . .
+                    . . . . . . . 2 2 . . . . . . .
+                    . . . . . . 2 2 2 . . . . . . .
+                    . . . . . 2 . . . 2 . . . . . .
+                    . . . . 2 2 . . . . 2 . . . . .
+                    . . . . . . . . . . . 2 . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                    . . . . . . . . . . . . . . . .
+                `)
+            }
+        }
+    }
 })
 
 //event handlers
@@ -62,7 +90,9 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             }
         }
     } else {
-        
+        if (game.ask("Toggle simulation to " + !simToggle + "?")) {
+            simToggle = !simToggle
+        }
     }
 })
 
