@@ -22,7 +22,7 @@ game.onUpdateInterval(400, function () {
         for (let y = 0; y < worldSizeY; y++) {
             for (let x = 0; x < worldSizeX; x++) {
                 liveSurroundingNum = 0
-                
+
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Top), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
@@ -57,8 +57,8 @@ game.onUpdateInterval(400, function () {
 //event handlers
 
 //functions
-function controllerSync (upOdown: boolean) {
-    if(upOdown) {
+function controllerSync(upOdown: boolean) {
+    if (upOdown) {
         if (controller.player1.isPressed(ControllerButton.Down)) {
             upAndDown()
         }
@@ -68,7 +68,7 @@ function controllerSync (upOdown: boolean) {
         }
     }
 }
-function upAndDown () {
+function upAndDown() {
     if (game.ask("Change border size?", "This can always be undone.")) {
         worldBoxXY = 0
         while (worldBoxXY < 3 || worldBoxXY > 16) {
@@ -80,12 +80,12 @@ function upAndDown () {
         tiles.setCurrentTilemap(tilemap`world`)
         gridToggle = false
         tiles.placeOnTile(cursor, tiles.getTileLocation(1, 1))
-        
+
         for (let y = worldBoxMax; y >= worldSizeY; y--) {
             for (let x = 0; x <= worldBoxMax; x++) {
                 tiles.setWallAt(tiles.getTileLocation(x, y), true)
                 tiles.setTileAt(tiles.getTileLocation(x, y), assets.tile`wall`)
-                
+
             }
         }
         for (let x = worldBoxMax; x >= worldSizeY; x--) {
