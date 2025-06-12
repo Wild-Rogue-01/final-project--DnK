@@ -27,21 +27,24 @@ game.onUpdateInterval(400, function () {
         for (let y = 0; y < worldSizeY; y++) {
             for (let x = 0; x < worldSizeX; x++) {
                 liveSurroundingNum = 0
-                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Top), assets.tile`filled`)) {
-                    liveSurroundingNum++
-                }
-                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Right), assets.tile`filled`)) {
-                    liveSurroundingNum++
-                }
-                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Bottom), assets.tile`filled`)) {
-                    liveSurroundingNum++
-                }
-                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Left), assets.tile`filled`)) {
-                    liveSurroundingNum++
+                // Check all 8 neighbors
+                for (let dx = -1; dx <= 1; dx++) {
+                    for (let dy = -1; dy <= 1; dy++) {
+                        if (!(dx == 0 && dy == 0)) { // skip the cell itself
+                            let nx = x + dx
+                            let ny = y + dy
+                            if (nx >= 0 && nx < worldSizeX && ny >= 0 && ny < worldSizeY) {
+                                if (tiles.tileAtLocationEquals(tiles.getTileLocation(nx, ny), assets.tile`filled`)) {
+                                    liveSurroundingNum++
+                                }
+                            }
+                        }
+                    }
                 }
                 numArray.push(liveSurroundingNum)
             }
         }
+        num = 0
         for (let y = 0; y < worldSizeY; y++) {
             for (let x = 0; x < worldSizeX; x++) {
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y), assets.tile`filled`)) {
@@ -53,7 +56,7 @@ game.onUpdateInterval(400, function () {
                         }
                     }
                 } else {
-                    if (numArray[num] >= 3) {
+                    if (numArray[num] == 3) { // Only exactly 3 neighbors causes birth
                         tiles.setTileAt(tiles.getTileLocation(x, y), assets.tile`filled`)
                     }
                 }
