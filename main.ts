@@ -84,7 +84,7 @@ function controllerSync(upOdown: boolean) {
 function upAndDown() {
     if (game.ask("Change border size?", "This can always be undone.")) {
         worldBoxXY = 0
-        while (worldBoxXY < 3 || worldBoxXY > 16) {
+        while (worldBoxXY < worldBoxMin || worldBoxXY > worldBoxMax) {
             worldBoxXY = game.askForNumber("Set world box size, " + worldBoxMin + " - " + worldBoxMax, 2)
         }
         worldSizeX = worldBoxXY
