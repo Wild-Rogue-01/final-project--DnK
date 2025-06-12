@@ -15,14 +15,18 @@ let worldSizeY: number = worldBoxMax
 
 let liveSurroundingNum: number = null
 
+let numArray: number[] = null
+let num: number = null
+
 //game update
 
 game.onUpdateInterval(400, function () {
     if (simToggle) {
+        numArray = []
+        num = 0
         for (let y = 0; y < worldSizeY; y++) {
             for (let x = 0; x < worldSizeX; x++) {
                 liveSurroundingNum = 0
-
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Top), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
@@ -35,9 +39,13 @@ game.onUpdateInterval(400, function () {
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Left), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
-
+                numArray.push(liveSurroundingNum)
+            }
+        }
+        for (let y = 0; y < worldSizeY; y++) {
+            for (let x = 0; x < worldSizeX; x++) {
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y), assets.tile`filled`)) {
-                    if (liveSurroundingNum < 2 || liveSurroundingNum > 3) {
+                    if (numArray[num] < 2 || numArray[num] > 3) {
                         if (gridToggle) {
                             tiles.setTileAt(tiles.getTileLocation(x, y), assets.tile`blank_gridtrue`)
                         } else {
@@ -45,10 +53,11 @@ game.onUpdateInterval(400, function () {
                         }
                     }
                 } else {
-                    if (liveSurroundingNum == 3) {
+                    if (numArray[num] >= 3) {
                         tiles.setTileAt(tiles.getTileLocation(x, y), assets.tile`filled`)
                     }
                 }
+                num++
             }
         }
     }
