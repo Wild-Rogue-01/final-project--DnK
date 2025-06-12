@@ -9,6 +9,7 @@ let cursor: Sprite = null
 let simToggle: boolean = false
 
 let worldBoxMax: number = 16
+let worldBoxMin: number = 3
 let worldBoxXY: number = worldBoxMax
 let worldSizeX: number = worldBoxMax
 let worldSizeY: number = worldBoxMax
@@ -17,6 +18,8 @@ let liveSurroundingNum: number = null
 
 let numArray: number[] = null
 let num: number = null
+
+let cursorSpeed: number = 200
 
 //game update
 
@@ -84,7 +87,7 @@ function upAndDown() {
     if (game.ask("Change border size?", "This can always be undone.")) {
         worldBoxXY = 0
         while (worldBoxXY < 3 || worldBoxXY > 16) {
-            worldBoxXY = game.askForNumber("Set world box size, 3 - 16", 2)
+            worldBoxXY = game.askForNumber("Set world box size, " + worldBoxMin + " - " + worldBoxMax, 2)
         }
         worldSizeX = worldBoxXY
         worldSizeY = worldBoxXY
@@ -171,7 +174,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
 cursor = sprites.create(assets.image`cursor`, SpriteKind.Player)
 tiles.setCurrentTilemap(tilemap`world`)
 
-controller.moveSprite(cursor, 100, 100)
+controller.moveSprite(cursor, cursorSpeed, cursorSpeed)
 
 scene.cameraFollowSprite(cursor)
 tiles.placeOnTile(cursor, tiles.getTileLocation(1, 1))
