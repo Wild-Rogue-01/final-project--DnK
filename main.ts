@@ -56,7 +56,7 @@ game.onUpdateInterval(400, function () {
                         }
                     }
                 } else {
-                    if (numArray[num] >= 3) {
+                    if (numArray[num] == 3) {
                         tiles.setTileAt(tiles.getTileLocation(x, y), assets.tile`filled`)
                     }
                 }
