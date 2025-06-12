@@ -33,13 +33,25 @@ game.onUpdateInterval(400, function () {
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Top), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
+                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Top).getNeighboringLocation(CollisionDirection.Right), assets.tile`filled`)) {
+                    liveSurroundingNum++
+                }
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Right), assets.tile`filled`)) {
+                    liveSurroundingNum++
+                }
+                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Right).getNeighboringLocation(CollisionDirection.Bottom), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Bottom), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
+                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Bottom).getNeighboringLocation(CollisionDirection.Left), assets.tile`filled`)) {
+                    liveSurroundingNum++
+                }
                 if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Left), assets.tile`filled`)) {
+                    liveSurroundingNum++
+                }
+                if (tiles.tileAtLocationEquals(tiles.getTileLocation(x, y).getNeighboringLocation(CollisionDirection.Left).getNeighboringLocation(CollisionDirection.Top), assets.tile`filled`)) {
                     liveSurroundingNum++
                 }
                 numArray.push(liveSurroundingNum)
